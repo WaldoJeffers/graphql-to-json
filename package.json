@@ -9,7 +9,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "preferGlobal": true,
+  "keywords": [
+    "graphql",
+    "json",
+    "cli"
+  ],
   "author": "Waldo Jeffers",
   "license": "MIT",
   "dependencies": {},

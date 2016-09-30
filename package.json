@@ -1,7 +1,7 @@
 {
   "name": "graphql-to-json",
   "bin": {
-    "graphql-to-json": "index.js"
+    "graphql-to-json": "./bin/bin.js"
   },
   "version": "1.0.1",
   "description": "Generate a JSON representation of your GraphQL schema",

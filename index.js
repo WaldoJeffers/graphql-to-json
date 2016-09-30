@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-module.exports = ({input, output = 'schema.json'}, cb = () => {}) => {
+module.exports = ({input, output}, cb = () => {}) => {
   // INPUT
   if (!input){
     throw new Error('You must provide an input path.');
@@ -12,7 +12,7 @@ module.exports = ({input, output = 'schema.json'}, cb = () => {}) => {
   const loaded_module = module.children.find(mod => path.normalize(mod.id) === filepath);
   const graphql = loaded_module.children.find(mod => mod.exports.graphql).exports;
   // OUTPUT
-  if (path.extname(output) === ''){
+  if (output && path.extname(output) === ''){
     output = path.join(output, 'schema.json');
   }
 
@@ -20,11 +20,16 @@ module.exports = ({input, output = 'schema.json'}, cb = () => {}) => {
   return graphql
     .graphql(schema, graphql.introspectionQuery)
     .then(result => JSON.stringify(result, null, 2))
-    .then(json => new Promise((resolve, reject) => fs.writeFile(output, json, (err) => {
-      if (err){
-        return reject(err);
+    .then(json => {
+      if (output){
+        return new Promise((resolve, reject) => fs.writeFile(output, json, (err) => {
+          if (err){
+            return reject(err);
+          }
+          cb(json);
+          resolve(json);
+        }));
       }
-      cb();
-      resolve();
-    })));
+      return json;
+    });
 };

@@ -5,24 +5,67 @@ A Node.js module to generate a JSON representation of your GraphQL schema
 If you are using [Facebook's Relay](https://facebook.github.io/relay/), you know (or will soon find out) that you need to provide a JSON version of your GraphQL schema to the [Babel Relay Plugin](https://facebook.github.io/relay/docs/guides-babel-plugin.html). This very simple CLI tool allows you to generate the JSON representation very easily. The module does what is described in [the related section of Relay's documentation](https://facebook.github.io/relay/docs/guides-babel-plugin.html#schema-json).
 
 ## Installation
-This module should be **globally** installed via npm :
+If you want to use **graphql-to-json" as a CLI tool, install it *globally* with npm:
 ```bash
 npm install -g graphql-to-json
 ```
 
-If you really do not want to install it globally, you can still install locally with :
+If you want to use it as module, install it locally:
 ```bash
 npm install --save graphql-to-json
 ```
-but you will need to run `.\node_modules\.bin\graphql-to-json PATH_TO_SCHEMA [OUTPUT_PATH]` to use, or use something like [zxc](https://www.npmjs.com/package/zxc).
 
 ## Usage
-```bash
-graphql-to-json PATH_TO_SCHEMA [OUTPUT_PATH]
+### As a module
+```javascript
+graphqlToJson({input : String, [output : String]}, [callback]);
 ```
-where :
-* `PATH_TO_SCHEMA` : relative or absolute path to a node module which exports a [GraphQLSchema instance](http://graphql.org/graphql-js/type/#graphqlschema)
-* `OUTPUT_PATH` (optional) : relative or absolute path where you want to create the file containing the JSON version of your schema. If no filename is provided, the file is named `schema.json` by default. If no path is provided, the file is created where the command is executed.
+
+#### Parameters
+* `input` *String* : relative or absolute path to a node module which exports a [GraphQLSchema instance](http://graphql.org/graphql-js/type/#graphqlschema)
+* `output` *String* (optional) : relative or absolute path where you want to create the file containing the JSON version of your schema. If no filename is provided, the file is named `schema.json` by default. If no path is provided, the file is created where the command is executed
+* `callback` *Function* (optional) : a function to execute when the output file is created.
+
+#### Returns
+* *Promise* : a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled when the output file is created.
+
+### As a CLI tool
+```bash
+graphql-to-json INPUT [OUTPUT]
+```
+See above for more information about the parameters.
+
+*NB* : the CLI just calls the function exported by the module.
+
+## Examples
+### As a module, with no callback
+```javascript
+// index.js
+// the file that creates your GraphQLSchema is located at ./data/schema.js
+const graphqlToJson = require('graphql-to-json');
+graphqlToJson({input : './data/schema.js', output : './data/schema.json'});
+```
+### As a module, with a callback
+```javascript
+// index.js
+// the file that creates your GraphQLSchema is located at ./data/schema.js
+const graphqlToJson = require('graphql-to-json');
+graphqlToJson({input : './data/schema.js', output : './data/schema.json'}, () => alert('Done !'));
+```
+### As a module, with a promise
+```javascript
+// index.js
+// the file that creates your GraphQLSchema is located at ./data/schema.js
+const graphqlToJson = require('graphql-to-json');
+graphqlToJson({
+  input : './data/schema.js',
+  output : './data/schema.json'
+}).then(() => alert('Done !'));
+```
+### As a CLI tool
+```
+$ graphql-to-json ./data/schema.js ./data/schema.json
+```
 
 ## License
 MIT License

@@ -2,10 +2,10 @@
 A Node.js module to generate a JSON representation of your GraphQL schema
 
 ## Why
-If you are using [Facebook's Relay](https://facebook.github.io/relay/), you know (or will soon find out) that you need to provide a JSON version of your GraphQL schema to the [Babel Relay Plugin](https://facebook.github.io/relay/docs/guides-babel-plugin.html). This very simple CLI tool allows you to generate the JSON representation very easily. The module does what is described in [the related section of Relay's documentation](https://facebook.github.io/relay/docs/guides-babel-plugin.html#schema-json).
+If you are using [Facebook's Relay](https://facebook.github.io/relay/), you know (or will soon find out) that you need to provide a JSON version of your GraphQL schema to the [Babel Relay Plugin](https://facebook.github.io/relay/docs/guides-babel-plugin.html). This very simple module allows you to generate the JSON representation very easily. The module does what is described in [the related section of Relay's documentation](https://facebook.github.io/relay/docs/guides-babel-plugin.html#schema-json).
 
 ## Installation
-If you want to use **graphql-to-json" as a CLI tool, install it *globally* with npm:
+If you want to use **graphql-to-json** as a CLI tool, install it *globally* with npm:
 ```bash
 npm install -g graphql-to-json
 ```

@@ -18,7 +18,7 @@ npm install --save graphql-to-json
 ## Usage
 ### As a module
 ```javascript
-graphqlToJson({input : String, [output : String]}, [callback]);
+graphqlToJson({input: String, [output: String]}, [callback]);
 ```
 
 #### Parameters
@@ -43,23 +43,19 @@ See above for more information about the parameters.
 // index.js
 // the file that creates your GraphQLSchema is located at ./data/schema.js
 const graphqlToJson = require('graphql-to-json');
-graphqlToJson({input : './data/schema.js', output : './data/schema.json'});
+graphqlToJson({input: './data/schema.js', output: './data/schema.json'});
 ```
 ### As a module, with a callback
 ```javascript
-// index.js
-// the file that creates your GraphQLSchema is located at ./data/schema.js
 const graphqlToJson = require('graphql-to-json');
-graphqlToJson({input : './data/schema.js', output : './data/schema.json'}, () => alert('Done !'));
+graphqlToJson({input: './data/schema.js', output: './data/schema.json'}, () => alert('Done !'));
 ```
 ### As a module, with a promise
 ```javascript
-// index.js
-// the file that creates your GraphQLSchema is located at ./data/schema.js
 const graphqlToJson = require('graphql-to-json');
 graphqlToJson({
-  input : './data/schema.js',
-  output : './data/schema.json'
+  input: './data/schema.js',
+  output: './data/schema.json'
 }).then(() => alert('Done !'));
 ```
 ### As a CLI tool
@@ -70,7 +66,7 @@ $ graphql-to-json ./data/schema.js ./data/schema.json
 ## License
 MIT License
 
-Copyright (c) 2016 WaldoJeffers
+Copyright (c) 2016 Waldo Jeffers
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

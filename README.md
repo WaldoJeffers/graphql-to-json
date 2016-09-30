@@ -22,12 +22,12 @@ graphqlToJson({input: String, [output: String]}, [callback]);
 ```
 
 #### Parameters
-* `input` *String* : relative or absolute path to a node module which exports a [GraphQLSchema instance](http://graphql.org/graphql-js/type/#graphqlschema)
-* `output` *String* (optional) : relative or absolute path where you want to create the file containing the JSON version of your schema. If no filename is provided, the file is named `schema.json` by default. If no path is provided, the file is created where the command is executed
-* `callback` *Function* (optional) : a function to execute when the output file is created.
+* `input` *String* : relative or absolute path to a node module which exports a [GraphQLSchema. instance](http://graphql.org/graphql-js/type/#graphqlschema)
+* `output` *String* (optional) : relative or absolute path where you want to create the file containing the JSON version of your schema. If this parameter is not provided, no file is created.
+* `callback` *Function* (optional) : a function to execute when the schema is generated. The function is called with the JSON schema as its first parameter.
 
 #### Returns
-* *Promise* : a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is fulfilled when the output file is created.
+* *Promise* : a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which is resolved with the JSON schema.
 
 ### As a CLI tool
 ```bash
@@ -35,7 +35,7 @@ graphql-to-json INPUT [OUTPUT]
 ```
 See above for more information about the parameters.
 
-*NB* : the CLI just calls the function exported by the module.
+*NB* : the CLI just calls the function exported by the module, but if no `output` is provided, a file called `schema.json` is created where the command is executed.
 
 ## Examples
 ### As a module, with no callback
@@ -45,18 +45,20 @@ See above for more information about the parameters.
 const graphqlToJson = require('graphql-to-json');
 graphqlToJson({input: './data/schema.js', output: './data/schema.json'});
 ```
-### As a module, with a callback
+### As a module, with a callback and no output parameter
 ```javascript
 const graphqlToJson = require('graphql-to-json');
-graphqlToJson({input: './data/schema.js', output: './data/schema.json'}, () => alert('Done !'));
+graphqlToJson({input: './data/schema.js'}, (schema) => console.log(schema));
+// no output file is created
 ```
-### As a module, with a promise
+### As a module, with a promise and an output parameter
 ```javascript
 const graphqlToJson = require('graphql-to-json');
 graphqlToJson({
   input: './data/schema.js',
   output: './data/schema.json'
-}).then(() => alert('Done !'));
+}).then((schema) => console.log(schema));
+// schema.json is created in ./data
 ```
 ### As a CLI tool
 ```

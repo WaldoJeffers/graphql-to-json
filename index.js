@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const util = require('./util.js');
 
 module.exports = ({input, output}, cb = () => {}) => {
   // INPUT
@@ -12,8 +13,8 @@ module.exports = ({input, output}, cb = () => {}) => {
   const loaded_module = module.children.find(mod => path.normalize(mod.id) === filepath);
   const graphql = loaded_module.children.find(mod => mod.exports.graphql).exports;
   // OUTPUT
-  if (output && path.extname(output) === ''){
-    output = path.join(output, 'schema.json');
+  if (output){
+    output = util.normalizePath(output);
   }
 
   // WRITE

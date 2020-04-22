@@ -1,4 +1,5 @@
 const fs = require('fs');
+const graphql = require('graphql');
 const path = require('path');
 const util = require('./util.js');
 
@@ -9,9 +10,6 @@ module.exports = ({input, output}, cb = () => {}) => {
   }
   const filepath = path.resolve(input);
   const schema = require(filepath);
-  // Ugly hack. Since graphql uses instanceof everywhere, the schema we require is not considered a valid graphql Schema because it was not created with the graphql module installed in this module We have to retrieve the "original" graphql module
-  const loaded_module = module.children.find(mod => path.normalize(mod.id) === filepath);
-  const graphql = loaded_module.children.find(mod => mod.exports.graphql).exports;
   // OUTPUT
   if (output){
     output = util.normalizePath(output);

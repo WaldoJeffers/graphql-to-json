@@ -17,6 +17,9 @@
   "author": "Waldo Jeffers",
   "license": "MIT",
   "dependencies": {},
+  "peerDependencies": {
+    "graphql": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WaldoJeffers/graphql-to-json.git"
